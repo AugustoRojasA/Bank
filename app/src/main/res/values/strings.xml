@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">BancaMovil</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="version">BancaMovi - v5.0.0</string>
+
+    <string name="welcome">Bienvenido</string>
+    <string name="press.back.again">Presione una vez más para salir</string>
+    <string name="search">Buscar</string>
+    <string name="selected">Seleccione</string>
+    <string name="ellipsis">...</string>
+
+    <!-- Button -->
+    <string name="btn.finalize">Terminar</string>
+    <string name="btn.close">Cerrar</string>
+    <string name="btn.confirmed">Confirmar</string>
+    <string name="btn.next">Siguiente</string>
+    <string name="btn.verify">Verificar</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="login.username">Usuario</string>
+    <string name="login.password">Contraseña</string>
+    <string name="login.username.text">%1$s ( %2$s )</string>
+    <string name="login.footer">Red Logística del Perú</string>
+    <string name="login.config">Config</string>
+</resources>

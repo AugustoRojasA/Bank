@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/accountsFragment2">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.server.bancamovil.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.server.bancamovil.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.server.bancamovil.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/accountsFragment2"
+        android:name="com.server.bancamovil.ui.home.AccountsFragment"
+        android:label="Productos" >
+        <action
+            android:id="@+id/action_accountsFragment2_to_movementFragment"
+            app:destination="@id/movementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movementFragment"
+        android:name="com.server.bancamovil.ui.movement.MovementFragment"
+        android:label="Consultas"
+        tools:layout="@layout/fragment_movement" />
+</navigation>
