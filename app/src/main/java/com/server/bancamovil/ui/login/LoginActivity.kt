@@ -1,14 +1,17 @@
 package com.server.bancamovil.ui.login
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.server.bancamovil.MainActivity
 import com.server.bancamovil.R
 import com.server.bancamovil.databinding.ActivityLoginBinding
+import com.server.bancamovil.utils.CustomAlert
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,12 +53,18 @@ class LoginActivity : AppCompatActivity() {
             val usuario = usuariosContraseñas.entries.find { it.value == password }?.key
             if (usuario != null) {
                 goToMenuActivity()
+            }else{
+                val customAlert = CustomAlert(this)
+
+                val message = "La contraseña no corresponde al usuario"
+                val okListener = DialogInterface.OnClickListener { dialog, which ->
+                    Toast.makeText(this, "Acción confirmada", Toast.LENGTH_SHORT).show()
+                }
+                customAlert.showMessageOKCancel(message, okListener)
             }
         }
     }
 
-
-    /** Direcciona al Dashboard **/
     private fun goToMenuActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

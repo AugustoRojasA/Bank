@@ -15,4 +15,5 @@
     <color name="danger">#D9534F</color>
     <color name="success">#198754</color>
     <color name="grey">#d2d2d2</color>
+    <color name="colorGray10">#ededed</color>
 </resources>

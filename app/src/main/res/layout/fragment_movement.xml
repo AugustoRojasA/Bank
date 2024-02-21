@@ -67,13 +67,32 @@
 
     </RelativeLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="120dp"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvLabelMovement"
+        android:text="Movimientos"
+        android:visibility="invisible"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewMovements"
-        android:layout_marginTop="150dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_movement">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelMovement"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_movement"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

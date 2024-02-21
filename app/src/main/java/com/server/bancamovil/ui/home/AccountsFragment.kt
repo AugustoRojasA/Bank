@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.server.bancamovil.R
+import com.server.bancamovil.data.response.AccountResponseItem
 import com.server.bancamovil.databinding.FragmentAccountsBinding
 import com.server.bancamovil.ui.viewmodel.AccountViewModel
 import com.server.bancamovil.ui.viewmodel.AccountViewModelFactory
@@ -47,7 +51,7 @@ class AccountsFragment : Fragment(), CoroutineScope,OnClickListener {
     private fun refreshData(){
         loadingDialog.show(activity?.supportFragmentManager!!, "")
         loadingDialog.isCancelable = false
-
+        _binding?.packingLoading?.isVisible = true
         launch {
             delay(3000)
             viewModel.obtenerCuentas()
@@ -86,7 +90,7 @@ class AccountsFragment : Fragment(), CoroutineScope,OnClickListener {
         viewModel.accountsLiveData.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> {
-
+                    _binding?.packingLoading?.isVisible = true
                 }
 
                 is Resource.Success -> {
@@ -95,9 +99,11 @@ class AccountsFragment : Fragment(), CoroutineScope,OnClickListener {
                         accountsAdapter.actualizarCuentas(accountsList)
                     }
                     loadingDialog.dismiss()
+                    _binding?.packingLoading?.isVisible = false
                 }
 
                 is Resource.Error -> {
+                    _binding?.packingLoading?.isVisible = false
                     loadingDialog.dismiss()
                 }
             }
@@ -106,7 +112,9 @@ class AccountsFragment : Fragment(), CoroutineScope,OnClickListener {
 
     }
 
-    override fun onClick(position: Int) {
-        binding.root.findNavController().navigate(R.id.movementFragment)
+    override fun onClick(position: Int, account: AccountResponseItem) {
+        val data = Gson().toJson(account)
+        val bundle = bundleOf("data" to data)
+        binding.root.findNavController().navigate(R.id.movementFragment, bundle)
     }
 }

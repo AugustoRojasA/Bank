@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.server.bancamovil.R
+import com.server.bancamovil.data.response.AccountResponseItem
 import com.server.bancamovil.databinding.FragmentMovementBinding
 import com.server.bancamovil.ui.viewmodel.AccountsAdapter
 import com.server.bancamovil.ui.viewmodel.MovementViewModel
@@ -49,12 +52,25 @@ class MovementFragment : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
 
         // Configurar RecyclerView
+        val data = arguments?.getString("data")
+        if (data != null) {
+            val account = Gson().fromJson(data, AccountResponseItem::class.java)
+            // Ahora puedes acceder a las propiedades del objeto account
+            val balance = account.balance
+            val currency = account.currency
+            val id = account.id
+            val currencySymbol = account.currencySymbol
+
+            binding.tvTypeAccount.text = currency
+            binding.tvAmmountMovement.text = balance.toString()
+        }
         movementAdapter = MovementAdapter()
         binding.recyclerviewMovements.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = movementAdapter
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,6 +95,7 @@ class MovementFragment : Fragment(), CoroutineScope {
                         movementAdapter.actualizarMovimientos(movementsList)
                     }
                     loadingDialog.dismiss()
+                    binding.tvLabelMovement.isVisible = true
                 }
 
                 is Resource.Error -> {

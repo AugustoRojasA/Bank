@@ -47,7 +47,7 @@ class AccountsAdapter( private val onClickListener: OnClickListener) : RecyclerV
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val accountItem = accounts[position]
-                    onClickListener.onClick(position)
+                    onClickListener.onClick(position,accountItem)
                     println("click aqui funciona bien: $accountItem")
                     // Realiza la acción deseada al hacer clic en el elemento
                     // Por ejemplo, puedes enviar el objeto accountItem a través de una interfaz para manejar el clic en la actividad o fragmento principal
@@ -58,5 +58,5 @@ class AccountsAdapter( private val onClickListener: OnClickListener) : RecyclerV
 }
 
 interface OnClickListener {
-    fun onClick(position: Int)
+    fun onClick(position: Int, account: AccountResponseItem)
 }
